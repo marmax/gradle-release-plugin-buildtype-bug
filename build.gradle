@@ -1,7 +1,3 @@
-// ./gradlew clean collectExecutables -Prelease.version=1.0.0-SNAPSHOT
-// ./gradlew clean release -Prelease.scope=patch -Prelease.stage=SNAPSHOT
-// ./gradlew clean release -Prelease.scope=patch -Prelease.stage=final
-
 plugins {
     id 'org.ajoberstar.release-opinion' version '1.4.2'
 }
@@ -27,20 +23,9 @@ release {
     }
 }
 
-tasks.release.dependsOn 'build'//, 'publishToMavelLocal'
+tasks.release.dependsOn 'build'
 
 model {
-    platforms {
-        linux_x86 {
-            architecture "x86"
-            operatingSystem "linux"
-        }
-        linux_amd64 {
-            architecture "x86_64"
-            operatingSystem "linux"
-        }
-    }
-
     buildTypes {
         debug
         release
@@ -50,18 +35,11 @@ model {
 model {
     components {
         hello(NativeExecutableSpec) {
-            targetPlatform 'linux_x86'
-            targetPlatform 'linux_amd64'
-
             sources.c {
                 source {
                     srcDir 'src/main/c'
                     include 'hello.c'
                 }
-            }
-
-            binaries.all {
-                cCompiler.args '-std=c99'
             }
         }
     }

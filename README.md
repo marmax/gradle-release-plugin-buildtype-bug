@@ -1,0 +1,1 @@
+# gradle-release-plugin-buildtype-bug
